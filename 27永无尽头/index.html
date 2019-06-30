@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div id="demo">demo</div>
+  <div id="test">test</div>
+  <script>
+    // var A = function() {
+    //   return B
+    // }
+    // var B = A.prototype = {
+    //   length: 2,
+    //   size() {
+    //     return this.length
+    //   }
+    // }
+    // console.log(A().size())
+
+    var A = function(selector) {
+      return new A.fn.init(selector)
+    }
+
+    A.fn = A.prototype = {
+      constructor: A,
+      init: function(selector) {
+        this[0] = document.getElementById(selector)
+        this.length = 1
+        return this
+      },
+      length: 2,
+      size: function() {
+        return this.length
+      }
+    }
+    A.fn.init.prototype = A.fn
+    // var demo = A('demo')
+    // var test = A('test')
+    console.log(A('demo'))
+    console.log(A('test').size())
+  </script>
+</body>
+</html>

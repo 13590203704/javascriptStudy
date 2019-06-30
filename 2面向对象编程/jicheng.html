@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // function SuperClass() {
+    //   this.superValue = true
+    // }
+    // SuperClass.prototype.getSuperValue = function() {
+    //   return this.superValue
+    // }
+
+    // function SubClass() {
+    //   this.subValue = false
+    // }
+    // SubClass.prototype = new SuperClass()
+    // SubClass.prototype.getSubValue = function() {
+    //   return this.subValue
+    // }
+    // var sub = new SubClass()
+    // console.log(sub)
+
+    function SuperClass(id) {
+      this.books = ['JS', 'html', 'css']
+      this.id = id
+    }
+    SuperClass.prototype.showBooks = function() {
+      console.log(this.books)
+    }
+
+    function SubClass(id) {
+      SuperClass.call(this, id)
+    }
+    debugger
+    var instance1 = new SubClass(10)
+    var instance2 = new SubClass(11)
+  </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // var obj = new Proxy({}, {
+    //   get: function (target, key, receiver) {
+    //     console.log(`getting ${key}!`);
+    //     return Reflect.get(target, key, receiver);
+    //   },
+    //   set: function (target, key, value, receiver) {
+    //     console.log(`setting ${key}!`);
+    //     return Reflect.set(target, key, value, receiver);
+    //   }
+    // });
+
+    var aa = [];
+    var dd = [
+     [
+      {a: 1},
+      {b: 1}
+     ],
+     [
+      {a: 2},
+      {b: 2}
+     ],
+     [
+      {a: 3},
+      {b: 3}
+     ]
+    ];
+    
+    for (let i = 0; i < dd.length; i++) {
+     let item = dd[i]
+     for (let j = 0; j < item.length; j++) {
+      debugger
+      let it = item[j]
+      if (!aa[j]) {
+       aa[j] = []
+      }
+      aa[j][i] = it
+     }
+    }
+    console.log(aa)
+  </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+<head id="head">
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body id="body">
+  <div id="div1">
+    <div id="div2"></div>
+  </div>
+  <div id="container">
+    <div>
+      <div>
+        <ul>
+          <li><span id="span1"></span></li>
+          <li><span id="span2"></span></li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div>
+        <ul>
+          <li id="li3"><span id="span6"></span></li>
+          <li id="li4"><span id="span7"></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script>
+    function getSublingName(node) {
+      if (node.previousSibling) {
+        var name = '',
+            count = 1,
+            nodeName = node.nodeName,
+            sibling = node.previousSibling;
+        while (sibling) {
+          if (sibling.nodeType === 1 && sibling.nodeType === node.nodeType && sibling.nodeName) {
+            if (nodeName === sibling.nodeName) {
+              name += ++count
+            } else {
+              count = 1
+              name += '|' + sibling.nodeName.toUpperCase();
+            }
+          }
+          sibling = sibling.previousSibling;
+        }
+        return name
+      } else {
+        return '';
+      }
+    }
+
+    var Interpreter = (function() {
+      return function(node, wrap) {
+        debugger
+        var path = [],
+            wrap = wrap || document;
+        if (node === wrap) {
+          if (wrap.nodeType === 1) {
+            path.push(wrap.nodeName.toUpperCase())
+          }
+          return path
+        }
+
+        if (node.parentNode !== wrap) {
+          path = arguments.callee(node.parentNode, wrap)
+        } else {
+          if (wrap.nodeType === 1) {
+            path.push(wrap.nodeName.toUpperCase())
+          }
+        }
+
+        var sublingsNames = getSublingName(node)
+
+        if (node.nodeType === 1) {
+          path.push(node.nodeName.toUpperCase() + sublingsNames)
+        }
+
+        return path
+      }
+    })();
+
+    var path = Interpreter(document.getElementById('div1'), document.getElementById('div2'));
+    console.log(path.join('>'));
+  </script>
+</body>
+</html>

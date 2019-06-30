@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div id="demo">lerom</div>
+  <button id="btn">提交</button>
+  <p id="test"></p>
+  <script>
+    // var bindEvent = function(dom, type, fn) {
+    //   if (dom.addEventListener) {
+    //     dom.addEventListener(type, fn, false)
+    //   } else if (dom.attachEvent) {
+    //     dom.attachEvent('on' + type, fn)
+    //   } else {
+    //     dom['on' + type] = fn;
+    //   }
+    // }
+    // var demoElement = document.getElementById('demo');
+
+    // bindEvent(demoElement, 'click', function() {
+    //   // this.style.background = 'red';
+    //   alert(this === window);
+    // })
+
+    // function bindIEEvent(dom, type, fn, data) {
+    //   var data = data || {};
+    //   dom.attachEvent('on' + type, function(e) {
+    //     fn.call(dom, e, data);
+    //   })
+    // }
+
+    // function $(id) {
+    //   return document.getElementById(id);
+    // }
+
+    // bindIEEvent($('btn'), 'click', function(e, d) {
+    //   $('test').innerHTML = e.type + d.text + this.tagName;
+    // }, {text: 'test demo'})
+
+    var Visitor = function() {
+      return {
+        splice: function() {
+          var args = Array.prototype.splice.call(arguments, 1);
+          var res = Array.prototype.splice.apply(arguments[0], args);
+          debugger
+          return res
+        },
+        push: function() {
+          var len = arguments[0].length || 0;
+          debugger
+          var args = this.splice(arguments, 1);
+          arguments[0].length = len + arguments.length - 1;
+          var res = Array.prototype.push.apply(arguments[0], args);
+          debugger
+          return res
+        },
+        pop: function() {
+          var res = Array.prototype.pop.apply(arguments[0]);
+          debugger
+          return res
+        }
+      }
+    }()
+    var a = new Object();
+    console.log(a.length);
+    Visitor.push(a, 1,2,3,4);
+    console.log(a.length)
+  </script>
+</body>
+</html>
